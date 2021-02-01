@@ -1,0 +1,28 @@
+const express = require('express');
+const app = express();
+var http = require('http').createServer(app);
+require('./db');
+const bodyParse = require('body-parser');
+const cors = require('cors');
+
+const io = require('socket.io')(http);
+const GasRoute = require('./routes/gas-sensor');
+
+
+app.use(cors());
+
+app.use(bodyParse.json({ limit: '50mb', extended: true }));
+app.use(bodyParse.urlencoded({ limit: '50mb', extended: true }));
+
+
+app.use('/gas', GasRoute);
+
+// io.on('connection', (socket) => {
+//   console.log('USER CONNECTED ' + socket.client.conn.id);
+//   module.exports = socket;
+//   //  socket.emit('msg',"Connected");
+// });
+
+http.listen(2431, () => {
+  console.log('listening on *:2431');
+});
