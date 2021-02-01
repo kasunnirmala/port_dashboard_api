@@ -18,7 +18,7 @@ router.post('/add', async (req, res) => {
     try {
         const savedShed = await new ShedModel({
             rfid: req.body.rfid,
-            pulseCount:parseFloat(req.body.pulseCount),
+            pulseCount:parseInt(req.body.pulseCount),
             date: moment(req.body.timestamp).tz("Asia/Colombo").format("YYYY-MM-DD"),
             timestamp: parseInt(req.body.timestamp),
         }).save();
