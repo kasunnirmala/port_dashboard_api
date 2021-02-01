@@ -15,7 +15,7 @@ app.use(bodyParse.json({ limit: '50mb', extended: true }));
 app.use(bodyParse.urlencoded({ limit: '50mb', extended: true }));
 
 
-app.use('/gas', GasRoute);
+app.use('/api/v1/gas', GasRoute);
 
 // io.on('connection', (socket) => {
 //   console.log('USER CONNECTED ' + socket.client.conn.id);
