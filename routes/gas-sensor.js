@@ -23,9 +23,18 @@ router.post('/add', async (req, res) => {
             timestamp: moment().tz("Asia/Colombo").valueOf()
         }).save();
 
-        res.json(savedGas);
+        // res.json(savedGas);
+        res.json({
+            "code":200,
+            "status":true,
+            "message":"Successfully Saved"
+        })
     } catch (error) {
-        res.json({ message: error.message });
+        res.json({
+            "code":400,
+            "status":false,
+            "message":error.message
+        })
     }
 
 });
