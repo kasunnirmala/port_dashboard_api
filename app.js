@@ -23,6 +23,8 @@ app.use('/api/v1/gas', GasRoute);
 //   //  socket.emit('msg',"Connected");
 // });
 
+
+// http is used to use this for io socket in future
 http.listen(2431, () => {
   console.log('listening on *:2431');
 });
