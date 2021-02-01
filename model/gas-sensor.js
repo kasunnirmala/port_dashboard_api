@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 var ObjectIdSchema = mongoose.Schema.ObjectId;
 var ObjectId = mongoose.Types.ObjectId;
 
-const BatchSchema = new mongoose.Schema({
+const GasSchema = new mongoose.Schema({
     _id: { type: ObjectIdSchema, default: function () { return new ObjectId() } },
     gasName: String,
     value: Number,
@@ -14,4 +14,4 @@ const BatchSchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('gas', BatchSchema);
+module.exports = mongoose.model('gas', GasSchema);

@@ -2,15 +2,14 @@ const mongoose = require('mongoose');
 var ObjectIdSchema = mongoose.Schema.ObjectId;
 var ObjectId = mongoose.Types.ObjectId;
 
-const BatchSchema = new mongoose.Schema({
+const WeatherSchema = new mongoose.Schema({
     _id: { type: ObjectIdSchema, default: function () { return new ObjectId() } },
-    batch_id: String,
-    status: Boolean,
-    start_time: String,
-    stop_time: String,
+    date:String,
+    timestamp:Number
+    
 }, {
     timestamps: true
 });
 
 
-module.exports = mongoose.model('batch', BatchSchema);
+module.exports = mongoose.model('weather', WeatherSchema);

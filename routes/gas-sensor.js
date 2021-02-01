@@ -14,7 +14,7 @@ router.get('/getAll', async (req, res) => {
 
 
 router.post('/add', async (req, res) => {
-    console.log("Add new");
+    console.log("Added new Gas Sensor Value");
     try {
         const savedGas = await new GasModel({
             gasName: req.body.gasName,
