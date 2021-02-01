@@ -12,6 +12,14 @@ router.get('/getAll', async (req, res) => {
     }
 })
 
+router.get('/getlastValues/', async (req, res) => {
+    try {
+        var shed =await ShedModel.findOne({},{},{ sort: { _id: -1 }, limit: 10});
+        res.json(shed);
+    } catch (error) {
+        res.json({ message: error.message });
+    }
+})
 
 router.post('/add', async (req, res) => {
     console.log("Added new Shed Value");

@@ -12,6 +12,15 @@ router.get('/getAll', async (req, res) => {
     }
 })
 
+router.get('/getlastValue/:gas', async (req, res) => {
+    try {
+        var gases =await GasModel.findOne({'gasName':req.params.gas.toUpperCase()},{},{ sort: { _id: -1 }, limit: 1});
+        res.json(gases);
+    } catch (error) {
+        res.json({ message: error.message });
+    }
+})
+
 
 router.post('/add', async (req, res) => {
     console.log("Added new Gas Sensor Value");
