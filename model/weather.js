@@ -4,6 +4,12 @@ var ObjectId = mongoose.Types.ObjectId;
 
 const WeatherSchema = new mongoose.Schema({
     _id: { type: ObjectIdSchema, default: function () { return new ObjectId() } },
+    temperature: Number,
+  humidity: Number,
+  rainfall: Number,
+  pressure: Number,
+  wind_speed: Number,
+  wind_direction: Number,
     date:String,
     timestamp:Number
     
