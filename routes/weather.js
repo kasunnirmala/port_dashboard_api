@@ -43,4 +43,16 @@ router.get('/data', async (req, res) => {
 })
 
 
+router.get('/getlastValue', async (req, res) => {
+    try {
+        var weather =await WeatherModel.findOne({},{},{ sort: { _id: -1 }, limit: 1});
+        res.json(weather);
+    } catch (error) {
+        res.json({ message: error.message });
+    }
+})
+
+
+
+
 module.exports = router;
