@@ -10,6 +10,7 @@ const GasRoute = require('./routes/gas-sensor');
 const WeatherRoute = require('./routes/weather');
 const ShedRoute = require('./routes/shed-data');
 const VehicleRoute = require('./routes/vehicle');
+const ParticleRoute = require('./routes/particle');
 
 
 app.use(cors());
@@ -22,6 +23,7 @@ app.use('/api/v1/gas', GasRoute);
 app.use('/api/v1/weather', WeatherRoute);
 app.use('/api/v1/shed', ShedRoute);  
 app.use('/api/v1/vehicle', VehicleRoute);  
+app.use('/api/v1/particle', ParticleRoute);  
 
 // io.on('connection', (socket) => {
 //   console.log('USER CONNECTED ' + socket.client.conn.id);
