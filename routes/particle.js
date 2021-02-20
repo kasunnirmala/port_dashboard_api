@@ -21,6 +21,19 @@ router.get('/getlastValue/:sensorName', async (req, res) => {
     }
 })
 
+router.get('/getlastValues', async (req, res) => {
+    try {
+        var particles =await ParticleModel.aggregate([
+            {'$sort': {'timestamp': -1}}, 
+            {'$group': {'_id': '$sensorName','data': {'$first': '$$ROOT'}}},
+             {'$sort': {'_id': 1}}
+            ]).allowDiskUse(true);;
+        res.json(particles);
+    } catch (error) {
+        res.json({ message: error.message });
+    }
+})
+
 
 router.post('/add', async (req, res) => {
     console.log("Added new Particle Sensor Value");
