@@ -21,6 +21,50 @@ router.get('/getlastValue/:gas', async (req, res) => {
     }
 })
 
+router.post('/getHistory', async (req, res) => {
+    var start_timestamp=req.body.start_timestamp;
+    var end_timestamp=req.body.end_timestamp;
+    end_timestamp=end_timestamp==0?moment().tz("Asia/Colombo").valueOf():end_timestamp;
+  try{
+
+    var gases=await GasModel.aggregate([
+        
+        {
+            '$match': {
+                'timestamp': {
+                    '$lte': end_timestamp
+                }
+            }
+        },
+        {
+            '$match': {
+                'timestamp': {
+                    '$gte': start_timestamp
+                }
+            }
+        }, {
+            '$sort': {
+              'timestamp': -1
+            }
+          }, {
+            '$limit': 1000
+          },
+         {
+          '$group': {
+            '_id': '$gasName', 
+            'data': {
+              '$push': '$$ROOT'
+            }
+          }
+        }
+      ]);
+    res.json(gases);
+    
+    } catch (error) {
+        res.json({ message: error.message });
+    }
+})
+
 
 router.post('/add', async (req, res) => {
     console.log("Added new Gas Sensor Value");

@@ -53,6 +53,47 @@ router.get('/getlastValue', async (req, res) => {
 })
 
 
+router.post('/getHistory', async (req, res) => {
+    var start_timestamp=req.body.start_timestamp;
+    var end_timestamp=req.body.end_timestamp;
+    end_timestamp=end_timestamp==0?moment().tz("Asia/Colombo").valueOf():end_timestamp;
+
+  try{
+
+    var weather=await WeatherModel.aggregate([
+        {
+            '$match': {
+                'timestamp': {
+                    '$lte': end_timestamp
+                }
+            }
+        },
+        {
+            '$match': {
+                'timestamp': {
+                    '$gte': start_timestamp
+                }
+            }
+        },
+
+        
+        {
+            '$sort': {
+                'timestamp': -1
+            }
+        },{
+            '$limit': 1000
+        },
+        
+        
+    ]);
+    res.json(weather);
+    
+    } catch (error) {
+        res.json({ message: error.message });
+    }
+})
+
 
 
 module.exports = router;
